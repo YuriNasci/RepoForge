@@ -1,0 +1,20 @@
+﻿/RepoForge
+│── RepoForge.sln
+│
+├── src/
+│   ├── RepoForge.Domain/
+│   │   ├── Entities/         # Entidades (opcional)
+│   │   ├── Interfaces/
+│   │   │   ├── IRepository.cs
+│   │   │   └── IUnitOfWork.cs
+│   │   └── RepoForge.Domain.csproj
+│   │
+│   └── RepoForge.Infrastructure.EfCore/
+│       ├── Persistence/
+│       │   ├── Repository.cs
+│       │   ├── UnitOfWork.cs
+│       │   └── DependencyInjection.cs
+│       └── RepoForge.Infrastructure.EfCore.csproj
+│
+└── tests/
+    └── RepoForge.UnitTests/
