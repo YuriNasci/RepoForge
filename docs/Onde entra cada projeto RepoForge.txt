@@ -1,0 +1,29 @@
++------------------------------------------------------------+
+|                       Presentation                         |
+| (ex.: MyApp.Api, MyApp.Worker, MyApp.Console)              |
++------------------------------------------------------------+
+                    |
+                    v
++------------------------------------------------------------+
+|                       Application                          |
+| (ex.: MyApp.Application)                                   |
+| Usa apenas contratos de RepoForge.Domain                   |
++------------------------------------------------------------+
+                    |
+                    v
++------------------------------------------------------------+
+|                        Domain                              |
+| RepoForge.Domain                                           |
+| - Entidades                                                |
+| - IRepository<T>                                           |
+| - IUnitOfWork                                              |
+| - IBlobRepository                                          |
++------------------------------------------------------------+
+                    ^
+                    |
++------------------------------------------------------------+
+|                    Infrastructure                          |
+| RepoForge.Infrastructure.EfCore → Relacional (Postgres)    |
+| RepoForge.Infrastructure.DynamoDb → NoSQL (AWS DynamoDB)   |
+| RepoForge.Infrastructure.S3 → Storage (AWS S3)             |
++------------------------------------------------------------+

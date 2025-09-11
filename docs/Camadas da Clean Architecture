@@ -1,0 +1,20 @@
+        +-----------------------------+
+        |         Presentation        |  -> Controllers, APIs, CLI
+        +-----------------------------+
+                    |
+                    v
+        +-----------------------------+
+        |        Application          |  -> Casos de uso, DTOs, Services
+        +-----------------------------+
+                    |
+                    v
+        +-----------------------------+
+        |          Domain             |  -> Entidades, Value Objects,
+        |                             |     Interfaces (contratos)
+        +-----------------------------+
+                    ^
+                    |
+        +-----------------------------+
+        |       Infrastructure        |  -> Implementações concretas
+        |                             |     (EF Core, DynamoDB, S3...)
+        +-----------------------------+
