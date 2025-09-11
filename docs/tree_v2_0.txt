@@ -1,0 +1,13 @@
+/RepoForge
+│── RepoForge.sln
+│
+├── src/
+│   ├── RepoForge.Domain/                    # Contratos
+│   ├── RepoForge.Infrastructure.EfCore/     # Relacional
+│   ├── RepoForge.Infrastructure.DynamoDb/   # NoSQL (AWS DynamoDB)
+│   ├── RepoForge.Infrastructure.S3/         # Storage (AWS S3)
+│   └── ...
+│
+└── tests/
+    ├── RepoForge.UnitTests/
+    └── RepoForge.IntegrationTests/
