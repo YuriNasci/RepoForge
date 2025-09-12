@@ -1,202 +1,212 @@
 # RepoForge
 
-Um framework de repositórios genérico para .NET 8.0 que simplifica a implementação do padrão Repository e Unit of Work.
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
+[![License](https://img.shields.io/badge/license-MIT-blue)](#)
+[![NuGet](https://img.shields.io/badge/NuGet-internal-lightgrey)](#)
 
-## Estrutura do Projeto
+**RepoForge** é uma coleção de bibliotecas para abstração de persistência em diferentes contextos, seguindo os princípios da **Clean Architecture**.  
+O objetivo é oferecer uma infraestrutura consistente para repositórios relacionais, NoSQL e storage de blobs, permitindo reuso em múltiplos projetos .NET.
+
+---
+## 📑 Índice
+
+- [✨ Filosofia de Design](#-filosofia-de-design)
+- [📂 Estrutura do Projeto](#-estrutura-do-projeto)
+- [🏗️ Arquitetura (Clean Architecture)](#️-arquitetura-clean-architecture)
+- [⚙️ Instalação](#️-instalação)
+- [🚀 Como Usar](#-como-usar)
+  - [Configuração no Program.cs](#configuração-no-programcs)
+  - [Exemplo: Exportar Usuários para JSON e CSV](#exemplo-exportar-usuários-para-json-e-csv)
+- [📌 Roadmap](#-roadmap)
+- [🤝 Contribuição](#-contribuição)
+- [📜 Licença](#-licença)
+
+---
+
+## ✨ Filosofia de Design
+
+- **Domain define contratos**:  
+  - `IRepository<T>`, `IUnitOfWork`, `IBlobRepository`, `IJsonDataAdapter`, `ICsvDataAdapter`.  
+- **Infrastructure implementa contratos**:  
+  - `S3Repository` (para blobs no Amazon S3).  
+  - `JsonDataAdapter` / `CsvDataAdapter` (adapta streams para dados semi-estruturados).  
+- **Separação clara de responsabilidades**:  
+  - `IBlobRepository` lida apenas com **bytes/streams**.  
+  - Adapters (`Json`, `Csv`, etc.) lidam com **formatação de dados**.  
+- **Extensível**: fácil adicionar novos adaptadores (XML, Parquet, Avro...) sem quebrar contratos existentes.
+
+---
+
+## 📂 Estrutura do Projeto
 
 ```
-/RepoForge
-│── RepoForge.sln
+
+RepoForge/
 │
-├── src/
-│   ├── RepoForge.Domain/                    # Contratos
-│   │   ├── Entities/                        # Entidades (opcional)
-│   │   ├── Interfaces/
-│   │   │   ├── IRepository.cs
-│   │   │   ├── IUnitOfWork.cs
-│   │   │   ├── IBlobRepository.cs
-│   │   │   ├── IJsonDataAdapter.cs
-│   │   │   └── ICsvDataAdapter.cs
-│   │   └── RepoForge.Domain.csproj
-│   │
-│   ├── RepoForge.Infrastructure.EfCore/     # Relacional
-│   │   ├── Persistence/
-│   │   │   ├── Repository.cs
-│   │   │   ├── UnitOfWork.cs
-│   │   │   └── DependencyInjection.cs
-│   │   └── RepoForge.Infrastructure.EfCore.csproj
-│   │
-│   ├── RepoForge.Infrastructure.DynamoDb/   # NoSQL (AWS DynamoDB)
-│   │   ├── Persistence/
-│   │   │   ├── DynamoRepository.cs
-│   │   │   └── DependencyInjection.cs
-│   │   └── RepoForge.Infrastructure.DynamoDb.csproj
-│   │
-│   ├── RepoForge.Infrastructure.S3/         # Storage (AWS S3)
-│   │   ├── Persistence/
-│   │   │   ├── S3Repository.cs
-│   │   │   └── DependencyInjection.cs
-│   │   └── RepoForge.Infrastructure.S3.csproj
-│   │
-│   ├── RepoForge.Infrastructure.DataAdapters.Json/  # Adaptadores JSON
-│   │   ├── JsonDataAdapter.cs
-│   │   ├── DependencyInjection.cs
-│   │   └── RepoForge.Infrastructure.DataAdapters.Json.csproj
-│   │
-│   ├── RepoForge.Infrastructure.DataAdapters.Csv/   # Adaptadores CSV
-│   │   ├── CsvDataAdapter.cs
-│   │   ├── DependencyInjection.cs
-│   │   └── RepoForge.Infrastructure.DataAdapters.Csv.csproj
-│   │
-│   └── RepoForge.Shared/                    # Utilitários compartilhados
-│       └── RepoForge.Shared.csproj
+├── Domain/
+│   └── Interfaces/
+│       ├── IRepository<T>
+│       ├── IUnitOfWork
+│       ├── IBlobRepository
+│       ├── IJsonDataAdapter
+│       └── ICsvDataAdapter
 │
-└── tests/
-    ├── RepoForge.UnitTests/
-    └── RepoForge.IntegrationTests/
+├── Infrastructure/
+│   ├── EfCore/                → Relacional (PostgreSQL, SQL Server)
+│   ├── DynamoDb/              → NoSQL (AWS DynamoDB)
+│   ├── S3/                    → Storage (AWS S3, blobs)
+│   └── DataAdapters/
+│       ├── Json/              → JsonDataAdapter : IJsonDataAdapter
+│       └── Csv/               → CsvDataAdapter : ICsvDataAdapter
+│
+└── Tests/                     → Unit e Integration tests
+
 ```
 
-## Versão 1.0 - Base Sólida
+---
 
-Esta versão fornece o núcleo mínimo utilizável do RepoForge:
+## 🏗️ Arquitetura (Clean Architecture)
 
-- **RepoForge.Domain**: Contratos e interfaces (`IRepository<T>`, `IUnitOfWork`)
-- **RepoForge.Infrastructure.EfCore**: Implementação genérica usando EF Core com PostgreSQL
-
-## Versão 2.0 - Expansão para NoSQL & Storage
-
-Esta versão expande o RepoForge para cenários além do relacional:
-
-- **RepoForge.Infrastructure.DynamoDb**: Implementação para AWS DynamoDB
-- **RepoForge.Infrastructure.S3**: Implementação para AWS S3 (armazenamento de blobs)
-- **RepoForge.IntegrationTests**: Testes de integração para todos os providers
-
-## Versão 2.1 - DataAdapters para Formatos Estruturados
-
-Esta versão adiciona suporte a formatos de dados estruturados:
-
-- **RepoForge.Infrastructure.DataAdapters.Json**: Adaptador para serialização/deserialização JSON
-- **RepoForge.Infrastructure.DataAdapters.Csv**: Adaptador para processamento de arquivos CSV
-
-## Tecnologias
-
-- .NET 8.0
-- Entity Framework Core 8.0
-- PostgreSQL (Npgsql)
-- AWS DynamoDB (AWSSDK.DynamoDBv2)
-- AWS S3 (AWSSDK.S3)
-- System.Text.Json (serialização JSON)
-- CsvHelper (processamento CSV)
-- xUnit (para testes)
-
-## Como Usar (ex.: API)
-`appsettings.json`
-```json
-{
-  "AWS": {
-    "Region": "us-east-1",
-    "Profile": "default"
-  }
-}
 ```
 
-`AppDbContext.cs`
++------------------------------------------------------------+
+\|                       Presentation                         |
+\| (MyApp.Api, MyApp.Worker, MyApp.Console)                   |
++------------------------------------------------------------+
+|
+v
++------------------------------------------------------------+
+\|                       Application                          |
+\| Usa apenas contratos de RepoForge.Domain                   |
+\| Ex.: UserService depende de IRepository<User>              |
+\| Ex.: ImportExportService depende de IJsonDataAdapter       |
+\|      e ICsvDataAdapter                                     |
++------------------------------------------------------------+
+|
+v
++------------------------------------------------------------+
+\|                        Domain                              |
+\| RepoForge.Domain                                           |
+\| - Entidades                                                |
+\| - IRepository<T>                                           |
+\| - IUnitOfWork                                              |
+\| - IBlobRepository                                          |
+\| - IJsonDataAdapter                                         |
+\| - ICsvDataAdapter                                          |
++------------------------------------------------------------+
+^
+|
++------------------------------------------------------------+
+\|                    Infrastructure                          |
+\| RepoForge.Infrastructure.EfCore → Relacional (Postgres)    |
+\| RepoForge.Infrastructure.DynamoDb → NoSQL (AWS DynamoDB)   |
+\| RepoForge.Infrastructure.S3 → Storage (AWS S3)             |
+\| RepoForge.Infrastructure.DataAdapters.Json → JsonAdapter   |
+\| RepoForge.Infrastructure.DataAdapters.Csv → CsvAdapter     |
++------------------------------------------------------------+
+
+````
+
+---
+
+## ⚙️ Instalação
+
+No momento, o RepoForge é distribuído como **biblioteca interna**.
+
+### 1. Clonar e adicionar como referência
+```bash
+git clone https://github.com/myorg/repoforge.git
+dotnet add reference ../RepoForge/src/RepoForge.Domain/RepoForge.Domain.csproj
+dotnet add reference ../RepoForge/src/RepoForge.Infrastructure.S3/RepoForge.Infrastructure.S3.csproj
+````
+
+### 2. (Opcional) Criar pacotes locais
+
+```bash
+dotnet pack src/RepoForge.Domain -o ./nupkgs
+dotnet pack src/RepoForge.Infrastructure.S3 -o ./nupkgs
+```
+
+---
+
+## 🚀 Como Usar
+
+### Configuração no `Program.cs`
+
 ```csharp
-using Microsoft.EntityFrameworkCore;
-using MyApp.Domain.Entities;
-
-namespace MyApp.Infrastructure;
-
-public class AppDbContext : DbContext
-{
-    public DbSet<User> Users => Set<User>();
-
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-}
-```
-
-`Program.cs`
-```csharp
-using Amazon.Extensions.NETCore.Setup;
-using RepoForge.Infrastructure.DynamoDb;
-using RepoForge.Infrastructure.S3;
 using RepoForge.Infrastructure.EfCore;
+using RepoForge.Infrastructure.S3;
 using RepoForge.Infrastructure.DataAdapters.Json;
 using RepoForge.Infrastructure.DataAdapters.Csv;
-using MyApp.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuração global da AWS
-builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
-
-// Repositório relacional (Postgres)
 builder.Services.AddPostgresRepository<AppDbContext>(
     builder.Configuration.GetConnectionString("DefaultConnection")!);
 
-// Repositório NoSQL (DynamoDB)
-builder.Services.AddDynamoRepository();
-
-// Repositório de blobs (S3)
-builder.Services.AddS3Repository("my-app-bucket");
-
-// DataAdapters para formatos estruturados
+builder.Services.AddS3Repository("my-bucket");
 builder.Services.AddJsonDataAdapter();
 builder.Services.AddCsvDataAdapter();
 
 var app = builder.Build();
-app.MapControllers();
 app.Run();
 ```
 
-## Exemplo de Uso dos DataAdapters
+---
 
-### Usando JsonDataAdapter
+### Exemplo: Exportar Usuários para JSON e CSV
+
 ```csharp
+public class UserExport
+{
+    public Guid Id { get; set; }
+    public string Name { get; set; } = default!;
+    public string Email { get; set; } = default!;
+}
+
 public class UserService
 {
-    private readonly IJsonDataAdapter _jsonAdapter;
-    
-    public UserService(IJsonDataAdapter jsonAdapter)
+    private readonly IJsonDataAdapter _json;
+    private readonly ICsvDataAdapter _csv;
+
+    public UserService(IJsonDataAdapter json, ICsvDataAdapter csv)
     {
-        _jsonAdapter = jsonAdapter;
+        _json = json;
+        _csv = csv;
     }
-    
-    public async Task SaveUserAsync(User user)
+
+    public async Task ExportUsers(List<UserExport> users)
     {
-        await _jsonAdapter.UploadJsonAsync($"users/{user.Id}", user);
-    }
-    
-    public async Task<User?> GetUserAsync(string userId)
-    {
-        return await _jsonAdapter.DownloadJsonAsync<User>($"users/{userId}");
+        await _json.UploadJsonAsync("exports/users.json", users);
+        await _csv.UploadCsvAsync("exports/users.csv", users);
     }
 }
 ```
 
-### Usando CsvDataAdapter
-```csharp
-public class ReportService
-{
-    private readonly ICsvDataAdapter _csvAdapter;
-    
-    public ReportService(ICsvDataAdapter csvAdapter)
-    {
-        _csvAdapter = csvAdapter;
-    }
-    
-    public async Task ExportUsersToCsvAsync(IEnumerable<User> users)
-    {
-        await _csvAdapter.UploadCsvAsync("reports/users.csv", users);
-    }
-    
-    public async Task<IEnumerable<User>?> ImportUsersFromCsvAsync()
-    {
-        return await _csvAdapter.DownloadCsvAsync<User>("reports/users.csv");
-    }
-}
-```
+---
 
-## Roadmap
+## 📌 Roadmap
 
-Consulte o arquivo `docs/roadmap.md` para ver o plano de evolução do projeto através das versões 1.0 → 4.0.
+* **v1.0** → EF Core (Postgres/SQL Server).
+* **v2.0** → Suporte a DynamoDB e S3.
+* **v2.1** → Introdução dos DataAdapters (Json e Csv).
+* **v3.0 (planejado)** → Cache (Redis), auditoria, queries avançadas.
+* **v4.0 (planejado)** → CLI e suporte a novos formatos (XML, Parquet, Avro).
+
+---
+
+## 🤝 Contribuição
+
+1. Faça um fork do repositório
+2. Crie uma branch para sua feature: `git checkout -b feature/nome`
+3. Commit suas alterações: `git commit -m 'Adiciona suporte a ...'`
+4. Envie para o fork: `git push origin feature/nome`
+5. Abra um Pull Request
+
+---
+
+## 📜 Licença
+
+Este projeto está licenciado sob os termos da **MIT License**.
+
+---
