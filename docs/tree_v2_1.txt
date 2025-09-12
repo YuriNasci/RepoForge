@@ -1,0 +1,33 @@
+RepoForge/
+│
+├── Domain/
+│   ├── Interfaces/
+│   │   ├── IBlobRepository.cs
+│   │   ├── IJsonDataAdapter.cs
+│   │   └── ICsvDataAdapter.cs
+│   │   // (futuro: IXmlDataAdapter, IParquetDataAdapter, etc.)
+│   │
+│   └── Entities/
+│       └── (opcional, se quisermos modelos auxiliares para testes ou demos)
+│
+├── Infrastructure/
+│   ├── S3/
+│   │   ├── Persistence/
+│   │   │   └── S3Repository.cs   // Implementa IBlobRepository
+│   │   └── DependencyInjection.cs
+│   │
+│   ├── DataAdapters/
+│   │   ├── Json/
+│   │   │   ├── JsonDataAdapter.cs       // Implementa IJsonDataAdapter
+│   │   │   └── DependencyInjection.cs
+│   │   │
+│   │   ├── Csv/
+│   │   │   ├── CsvDataAdapter.cs        // Implementa ICsvDataAdapter
+│   │   │   └── DependencyInjection.cs
+│   │   │
+│   │   └── // (futuro: XmlDataAdapter, ParquetDataAdapter, etc.)
+│   │
+│   └── DependencyInjection.cs  // Extensões de registro globais
+│
+└── Shared/
+    └── (helpers comuns: logging, serialização customizada, exceptions, etc.)

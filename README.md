@@ -65,16 +65,58 @@ Esta versão expande o RepoForge para cenários além do relacional:
 - AWS S3 (AWSSDK.S3)
 - xUnit (para testes)
 
-## Como Usar
+## Como Usar (ex.: API)
+`appsettings.json`
+```json
+{
+  "AWS": {
+    "Region": "us-east-1",
+    "Profile": "default"
+  }
+}
+```
 
+`AppDbContext.cs`
 ```csharp
-// No Program.cs - Versão 1.0 (Relacional)
-builder.Services.AddPostgresRepository(
-    builder.Configuration.GetConnectionString("DefaultConnection"));
+using Microsoft.EntityFrameworkCore;
+using MyApp.Domain.Entities;
 
-// No Program.cs - Versão 2.0 (NoSQL + Storage)
-builder.Services.AddDynamoRepository("us-east-1");
-builder.Services.AddS3Repository("meu-bucket", "us-east-1");
+namespace MyApp.Infrastructure;
+
+public class AppDbContext : DbContext
+{
+    public DbSet<User> Users => Set<User>();
+
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+}
+```
+
+`Program.cs`
+```csharp
+using Amazon.Extensions.NETCore.Setup;
+using RepoForge.Infrastructure.DynamoDb;
+using RepoForge.Infrastructure.S3;
+using RepoForge.Infrastructure.EfCore;
+using MyApp.Infrastructure;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Configuração global da AWS
+builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
+
+// Repositório relacional (Postgres)
+builder.Services.AddPostgresRepository<AppDbContext>(
+    builder.Configuration.GetConnectionString("DefaultConnection")!);
+
+// Repositório NoSQL (DynamoDB)
+builder.Services.AddDynamoRepository();
+
+// Repositório de blobs (S3)
+builder.Services.AddS3Repository("my-app-bucket");
+
+var app = builder.Build();
+app.MapControllers();
+app.Run();
 ```
 
 ## Roadmap
