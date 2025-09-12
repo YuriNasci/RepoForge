@@ -8,6 +8,9 @@
 |                       Application                          |
 | (ex.: MyApp.Application)                                   |
 | Usa apenas contratos de RepoForge.Domain                   |
+| Ex.: UserService depende de IRepository<User>              |
+| Ex.: ImportExportService depende de IJsonDataAdapter       |
+|      e ICsvDataAdapter                                     |
 +------------------------------------------------------------+
                     |
                     v
@@ -18,6 +21,8 @@
 | - IRepository<T>                                           |
 | - IUnitOfWork                                              |
 | - IBlobRepository                                          |
+| - IJsonDataAdapter                                         |
+| - ICsvDataAdapter                                          |
 +------------------------------------------------------------+
                     ^
                     |
@@ -26,4 +31,8 @@
 | RepoForge.Infrastructure.EfCore → Relacional (Postgres)    |
 | RepoForge.Infrastructure.DynamoDb → NoSQL (AWS DynamoDB)   |
 | RepoForge.Infrastructure.S3 → Storage (AWS S3)             |
+| RepoForge.Infrastructure.DataAdapters.Json                 |
+|     → JsonDataAdapter : IJsonDataAdapter                   |
+| RepoForge.Infrastructure.DataAdapters.Csv                  |
+|     → CsvDataAdapter : ICsvDataAdapter                     |
 +------------------------------------------------------------+

@@ -14,7 +14,9 @@ Um framework de repositórios genérico para .NET 8.0 que simplifica a implement
 │   │   ├── Interfaces/
 │   │   │   ├── IRepository.cs
 │   │   │   ├── IUnitOfWork.cs
-│   │   │   └── IBlobRepository.cs
+│   │   │   ├── IBlobRepository.cs
+│   │   │   ├── IJsonDataAdapter.cs
+│   │   │   └── ICsvDataAdapter.cs
 │   │   └── RepoForge.Domain.csproj
 │   │
 │   ├── RepoForge.Infrastructure.EfCore/     # Relacional
@@ -30,11 +32,24 @@ Um framework de repositórios genérico para .NET 8.0 que simplifica a implement
 │   │   │   └── DependencyInjection.cs
 │   │   └── RepoForge.Infrastructure.DynamoDb.csproj
 │   │
-│   └── RepoForge.Infrastructure.S3/         # Storage (AWS S3)
-│       ├── Persistence/
-│       │   ├── S3Repository.cs
-│       │   └── DependencyInjection.cs
-│       └── RepoForge.Infrastructure.S3.csproj
+│   ├── RepoForge.Infrastructure.S3/         # Storage (AWS S3)
+│   │   ├── Persistence/
+│   │   │   ├── S3Repository.cs
+│   │   │   └── DependencyInjection.cs
+│   │   └── RepoForge.Infrastructure.S3.csproj
+│   │
+│   ├── RepoForge.Infrastructure.DataAdapters.Json/  # Adaptadores JSON
+│   │   ├── JsonDataAdapter.cs
+│   │   ├── DependencyInjection.cs
+│   │   └── RepoForge.Infrastructure.DataAdapters.Json.csproj
+│   │
+│   ├── RepoForge.Infrastructure.DataAdapters.Csv/   # Adaptadores CSV
+│   │   ├── CsvDataAdapter.cs
+│   │   ├── DependencyInjection.cs
+│   │   └── RepoForge.Infrastructure.DataAdapters.Csv.csproj
+│   │
+│   └── RepoForge.Shared/                    # Utilitários compartilhados
+│       └── RepoForge.Shared.csproj
 │
 └── tests/
     ├── RepoForge.UnitTests/
@@ -56,6 +71,13 @@ Esta versão expande o RepoForge para cenários além do relacional:
 - **RepoForge.Infrastructure.S3**: Implementação para AWS S3 (armazenamento de blobs)
 - **RepoForge.IntegrationTests**: Testes de integração para todos os providers
 
+## Versão 2.1 - DataAdapters para Formatos Estruturados
+
+Esta versão adiciona suporte a formatos de dados estruturados:
+
+- **RepoForge.Infrastructure.DataAdapters.Json**: Adaptador para serialização/deserialização JSON
+- **RepoForge.Infrastructure.DataAdapters.Csv**: Adaptador para processamento de arquivos CSV
+
 ## Tecnologias
 
 - .NET 8.0
@@ -63,6 +85,8 @@ Esta versão expande o RepoForge para cenários além do relacional:
 - PostgreSQL (Npgsql)
 - AWS DynamoDB (AWSSDK.DynamoDBv2)
 - AWS S3 (AWSSDK.S3)
+- System.Text.Json (serialização JSON)
+- CsvHelper (processamento CSV)
 - xUnit (para testes)
 
 ## Como Usar (ex.: API)
@@ -97,6 +121,8 @@ using Amazon.Extensions.NETCore.Setup;
 using RepoForge.Infrastructure.DynamoDb;
 using RepoForge.Infrastructure.S3;
 using RepoForge.Infrastructure.EfCore;
+using RepoForge.Infrastructure.DataAdapters.Json;
+using RepoForge.Infrastructure.DataAdapters.Csv;
 using MyApp.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -114,9 +140,61 @@ builder.Services.AddDynamoRepository();
 // Repositório de blobs (S3)
 builder.Services.AddS3Repository("my-app-bucket");
 
+// DataAdapters para formatos estruturados
+builder.Services.AddJsonDataAdapter();
+builder.Services.AddCsvDataAdapter();
+
 var app = builder.Build();
 app.MapControllers();
 app.Run();
+```
+
+## Exemplo de Uso dos DataAdapters
+
+### Usando JsonDataAdapter
+```csharp
+public class UserService
+{
+    private readonly IJsonDataAdapter _jsonAdapter;
+    
+    public UserService(IJsonDataAdapter jsonAdapter)
+    {
+        _jsonAdapter = jsonAdapter;
+    }
+    
+    public async Task SaveUserAsync(User user)
+    {
+        await _jsonAdapter.UploadJsonAsync($"users/{user.Id}", user);
+    }
+    
+    public async Task<User?> GetUserAsync(string userId)
+    {
+        return await _jsonAdapter.DownloadJsonAsync<User>($"users/{userId}");
+    }
+}
+```
+
+### Usando CsvDataAdapter
+```csharp
+public class ReportService
+{
+    private readonly ICsvDataAdapter _csvAdapter;
+    
+    public ReportService(ICsvDataAdapter csvAdapter)
+    {
+        _csvAdapter = csvAdapter;
+    }
+    
+    public async Task ExportUsersToCsvAsync(IEnumerable<User> users)
+    {
+        await _csvAdapter.UploadCsvAsync("reports/users.csv", users);
+    }
+    
+    public async Task<IEnumerable<User>?> ImportUsersFromCsvAsync()
+    {
+        return await _csvAdapter.DownloadCsvAsync<User>("reports/users.csv");
+    }
+}
 ```
 
 ## Roadmap
