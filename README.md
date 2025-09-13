@@ -1,4 +1,7 @@
 # RepoForge
+<p align="center">
+  <img src="docs/banner.png" alt="RepoForge Banner" width="800"/>
+</p>
 
 [![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
 [![License](https://img.shields.io/badge/license-MIT-blue)](#)
