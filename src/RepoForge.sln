@@ -5,23 +5,21 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Domain", "src\RepoForge.Domain\RepoForge.Domain.csproj", "{9E814FCD-85E0-42C0-8E71-1711F494CBD1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Domain", "RepoForge.Domain\RepoForge.Domain.csproj", "{9E814FCD-85E0-42C0-8E71-1711F494CBD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Infrastructure.EfCore", "src\RepoForge.Infrastructure.EfCore\RepoForge.Infrastructure.EfCore.csproj", "{1CA5B2BE-5BCD-433D-AD8F-F8033A7AB6F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Infrastructure.EfCore", "RepoForge.Infrastructure.EfCore\RepoForge.Infrastructure.EfCore.csproj", "{1CA5B2BE-5BCD-433D-AD8F-F8033A7AB6F8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AB3BF05-4346-4AA6-1389-037BE0695223}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.UnitTests", "tests\RepoForge.UnitTests\RepoForge.UnitTests.csproj", "{112DF033-4B82-4546-93B9-71904BF2023E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.UnitTests", "..\tests\RepoForge.UnitTests\RepoForge.UnitTests.csproj", "{112DF033-4B82-4546-93B9-71904BF2023E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Infrastructure.DynamoDb", "src\RepoForge.Infrastructure.DynamoDb\RepoForge.Infrastructure.DynamoDb.csproj", "{64F0FBDB-255F-4B88-8428-AAB528A3C830}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Infrastructure.DynamoDb", "RepoForge.Infrastructure.DynamoDb\RepoForge.Infrastructure.DynamoDb.csproj", "{64F0FBDB-255F-4B88-8428-AAB528A3C830}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Infrastructure.S3", "src\RepoForge.Infrastructure.S3\RepoForge.Infrastructure.S3.csproj", "{1732499A-AD49-41D2-B72D-8C84AFDA54B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Infrastructure.S3", "RepoForge.Infrastructure.S3\RepoForge.Infrastructure.S3.csproj", "{1732499A-AD49-41D2-B72D-8C84AFDA54B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.IntegrationTests", "tests\RepoForge.IntegrationTests\RepoForge.IntegrationTests.csproj", "{12BD0B10-F027-408C-90A1-0FA292659A1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Infrastructure.DataAdapters.Json", "RepoForge.Infrastructure.DataAdapters.Json\RepoForge.Infrastructure.DataAdapters.Json.csproj", "{DA745772-C8A7-4CA8-A472-57A749095644}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Infrastructure.DataAdapters.Json", "src\RepoForge.Infrastructure.DataAdapters.Json\RepoForge.Infrastructure.DataAdapters.Json.csproj", "{DA745772-C8A7-4CA8-A472-57A749095644}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Infrastructure.DataAdapters.Csv", "src\RepoForge.Infrastructure.DataAdapters.Csv\RepoForge.Infrastructure.DataAdapters.Csv.csproj", "{ABB5CDDF-0963-412B-B3F0-B895BA1295EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Infrastructure.DataAdapters.Csv", "RepoForge.Infrastructure.DataAdapters.Csv\RepoForge.Infrastructure.DataAdapters.Csv.csproj", "{ABB5CDDF-0963-412B-B3F0-B895BA1295EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -136,10 +134,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{9E814FCD-85E0-42C0-8E71-1711F494CBD1} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{1CA5B2BE-5BCD-433D-AD8F-F8033A7AB6F8} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
-		{112DF033-4B82-4546-93B9-71904BF2023E} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{64F0FBDB-255F-4B88-8428-AAB528A3C830} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{1732499A-AD49-41D2-B72D-8C84AFDA54B9} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
-		{12BD0B10-F027-408C-90A1-0FA292659A1A} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{DA745772-C8A7-4CA8-A472-57A749095644} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{ABB5CDDF-0963-412B-B3F0-B895BA1295EB} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
