@@ -1,0 +1,19 @@
+RepoForge/
+│
+├── RepoForge.Abstractions/         → Interfaces e DTOs
+│   ├── IRepository.cs
+│   ├── IUnitOfWork.cs
+│   ├── IBlobRepository.cs
+│   ├── IDataAdapter.cs
+│   └── Models/
+│
+├── RepoForge.Core/                 → Implementações principais
+│   ├── Repositories/
+│   └── Adapters/
+│
+├── RepoForge.Providers/            → Implementações específicas
+│   ├── EntityFramework/
+│   ├── DynamoDb/
+│   └── S3/
+│
+└── Tests/                          → Testes unitários

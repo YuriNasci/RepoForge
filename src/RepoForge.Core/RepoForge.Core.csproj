@@ -7,20 +7,15 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>1.0.0</Version>
     <Authors>RepoForge Team</Authors>
-    <Description>JSON data adapter for RepoForge - A flexible repository pattern implementation for .NET</Description>
+    <Description>Core implementations for RepoForge - A flexible repository pattern implementation for .NET</Description>
     <PackageProjectUrl>https://github.com/yourusername/repoforge</PackageProjectUrl>
     <RepositoryUrl>https://github.com/yourusername/repoforge</RepositoryUrl>
-    <PackageTags>repository pattern, data access, json, .NET</PackageTags>
+    <PackageTags>repository pattern, data access, implementation, .NET</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RepoForge.Abstractions\RepoForge.Abstractions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
-    <PackageReference Include="System.Text.Json" Version="8.0.0" />
   </ItemGroup>
 
 </Project>
