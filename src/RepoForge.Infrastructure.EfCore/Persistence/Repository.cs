@@ -15,18 +15,23 @@ public class Repository<T> : IRepository<T> where T : class
         _dbSet = context.Set<T>();
     }
 
-    public async Task<T?> GetByIdAsync(Guid id) => await _dbSet.FindAsync(id);
+    public async Task<T?> GetByIdAsync(params object[] keys) =>
+        await _dbSet.FindAsync(keys);
 
-    public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
+    public async Task<IEnumerable<T>> GetAllAsync() =>
+        await _dbSet.ToListAsync();
 
-    public async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
+    public async Task AddAsync(T entity) =>
+        await _dbSet.AddAsync(entity);
 
-    public async Task UpdateAsync(T entity) => Task.Run(() => _dbSet.Update(entity));
+    public async Task UpdateAsync(T entity) =>
+        Task.Run(() => _dbSet.Update(entity));
 
-    public async Task DeleteAsync(Guid id)
+    public async Task DeleteAsync(params object[] keys)
     {
-        var entity = await _dbSet.FindAsync(id);
-        if (entity != null) _dbSet.Remove(entity);
+        var entity = await _dbSet.FindAsync(keys);
+        if (entity != null)
+            _dbSet.Remove(entity);
     }
 
     public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate) =>

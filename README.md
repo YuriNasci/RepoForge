@@ -157,7 +157,7 @@ app.Run();
 
 ---
 
-### Exemplo: Exportar Usuários para JSON e CSV
+### Exemplo 1.: Exportar Usuários para JSON e CSV
 
 ```csharp
 public class UserExport
@@ -185,7 +185,50 @@ public class UserService
     }
 }
 ```
+### Exemplo 2.: Exemplo: Uso com chave simples (Postgres, EF Core)
+```csharp
+public class UserService
+{
+    private readonly IRepository<User> _userRepo;
 
+    public UserService(IRepository<User> userRepo)
+    {
+        _userRepo = userRepo;
+    }
+
+    public async Task<User?> GetUser(Guid id)
+        => await _userRepo.GetByIdAsync(id);
+
+    public async Task DeleteUser(Guid id)
+        => await _userRepo.DeleteAsync(id);
+}
+```
+### Exemplo 3.: Exemplo: Uso com chave composta (DynamoDB)
+```csharp
+public class OrderService
+{
+    private readonly IRepository<Order> _orderRepo;
+
+    public OrderService(IRepository<Order> orderRepo)
+    {
+        _orderRepo = orderRepo;
+    }
+
+    public async Task<Order?> GetOrderAsync(string customerId, string orderId)
+        => await _orderRepo.GetByIdAsync(customerId, orderId);
+
+    public async Task DeleteOrderAsync(string customerId, string orderId)
+        => await _orderRepo.DeleteAsync(customerId, orderId);
+}
+```
+### Exemplo 4.: Uso Genérico
+```csharp
+// Get by single key
+var user = await userRepo.GetByIdAsync(Guid.Parse("d8e94b73-12ab-45f9-9a7d-1ab2c5f3c111"));
+
+// Get by composite key
+var order = await orderRepo.GetByIdAsync("customer-123", "order-456");
+```
 ---
 
 ## 📌 Roadmap
