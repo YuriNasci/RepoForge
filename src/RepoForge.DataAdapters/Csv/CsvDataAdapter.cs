@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +12,24 @@ namespace RepoForge.DataAdapters.Csv
     using CsvHelper;
     using RepoForge.Abstractions;
 
+    /// <summary>
+    /// Default implementation of <see cref="ICsvDataAdapter"/> that uses <see cref="IBlobRepository"/>
+    /// for storage and CsvHelper for CSV serialization.
+    /// </summary>
     public class CsvDataAdapter : ICsvDataAdapter
     {
         private readonly IBlobRepository _blobRepository;
 
+        /// <summary>
+        /// Creates a new <see cref="CsvDataAdapter"/>.
+        /// </summary>
+        /// <param name="blobRepository">Blob storage repository to read/write CSV payloads.</param>
         public CsvDataAdapter(IBlobRepository blobRepository)
         {
             _blobRepository = blobRepository;
         }
 
+        /// <inheritdoc />
         public async Task UploadCsvAsync<T>(string key, IEnumerable<T> data)
         {
             using var ms = new MemoryStream();
@@ -34,6 +43,7 @@ namespace RepoForge.DataAdapters.Csv
             await _blobRepository.UploadAsync(key, ms);
         }
 
+        /// <inheritdoc />
         public async Task<IEnumerable<T>?> DownloadCsvAsync<T>(string key) where T : class, new()
         {
             using var stream = await _blobRepository.DownloadAsync(key);
