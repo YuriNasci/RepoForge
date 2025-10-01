@@ -5,17 +5,17 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.EntityFrameworkCore", "RepoForge.Infrastructure.EfCore\RepoForge.EntityFrameworkCore.csproj", "{1CA5B2BE-5BCD-433D-AD8F-F8033A7AB6F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.EntityFrameworkCore", "src\RepoForge.EntityFrameworkCore\RepoForge.EntityFrameworkCore.csproj", "{1CA5B2BE-5BCD-433D-AD8F-F8033A7AB6F8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AB3BF05-4346-4AA6-1389-037BE0695223}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.UnitTests", "..\tests\RepoForge.UnitTests\RepoForge.UnitTests.csproj", "{112DF033-4B82-4546-93B9-71904BF2023E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.UnitTests", "tests\RepoForge.UnitTests\RepoForge.UnitTests.csproj", "{112DF033-4B82-4546-93B9-71904BF2023E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.DataAdapters", "RepoForge.Infrastructure.DataAdapters.Csv\RepoForge.DataAdapters.csproj", "{ABB5CDDF-0963-412B-B3F0-B895BA1295EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.DataAdapters", "src\RepoForge.DataAdapters\RepoForge.DataAdapters.csproj", "{ABB5CDDF-0963-412B-B3F0-B895BA1295EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Abstractions", "RepoForge.Abstractions\RepoForge.Abstractions.csproj", "{1F117855-9C24-45F3-BA5D-F500A2115219}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.Abstractions", "src\RepoForge.Abstractions\RepoForge.Abstractions.csproj", "{1F117855-9C24-45F3-BA5D-F500A2115219}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.AWS", "RepoForge.AWS\RepoForge.AWS.csproj", "{58DA589F-BE8D-4169-BD13-569BFFFF5D79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepoForge.AWS", "src\RepoForge.AWS\RepoForge.AWS.csproj", "{58DA589F-BE8D-4169-BD13-569BFFFF5D79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
