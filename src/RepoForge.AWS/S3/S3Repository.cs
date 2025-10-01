@@ -1,8 +1,8 @@
 using Amazon.S3;
 using Amazon.S3.Model;
-using RepoForge.Abstractions.Interfaces;
+using RepoForge.Abstractions;
 
-namespace RepoForge.Infrastructure.S3.Persistence;
+namespace RepoForge.AWS.S3;
 
 public class S3Repository : IBlobRepository
 {

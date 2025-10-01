@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using RepoForge.Domain.Interfaces;
-using RepoForge.Infrastructure.EfCore.Persistence;
+using RepoForge.Abstractions;
+using RepoForge.EntityFrameworkCore.Persistence;
 
-namespace RepoForge.Infrastructure.EfCore;
+namespace RepoForge.EntityFrameworkCore;
 
 public static class DependencyInjection
 {

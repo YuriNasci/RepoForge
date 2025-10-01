@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using RepoForge.Domain.Interfaces;
+using RepoForge.Abstractions;
 
-namespace RepoForge.Infrastructure.EfCore.Persistence;
+namespace RepoForge.EntityFrameworkCore.Persistence;
 
 public class UnitOfWork : IUnitOfWork
 {

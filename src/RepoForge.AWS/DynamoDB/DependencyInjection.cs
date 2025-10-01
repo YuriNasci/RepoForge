@@ -1,10 +1,9 @@
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
 using Microsoft.Extensions.DependencyInjection;
-using RepoForge.Abstractions.Interfaces;
-using RepoForge.Infrastructure.DynamoDb.Persistence;
+using RepoForge.Abstractions;
 
-namespace RepoForge.Infrastructure.DynamoDb;
+namespace RepoForge.AWS.DynamoDB;
 
 public static class DependencyInjection
 {

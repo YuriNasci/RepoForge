@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepoForge.Infrastructure.DataAdapters.Csv
+namespace RepoForge.DataAdapters.Csv
 {
     using System.Formats.Asn1;
     using System.Globalization;
     using System.Text;
     using CsvHelper;
-    using RepoForge.Domain.Interfaces;
+    using RepoForge.Abstractions;
 
     public class CsvDataAdapter : ICsvDataAdapter
     {

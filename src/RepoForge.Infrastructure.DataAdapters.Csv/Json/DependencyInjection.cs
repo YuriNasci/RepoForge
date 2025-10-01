@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using RepoForge.Abstractions.Interfaces;
+using RepoForge.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

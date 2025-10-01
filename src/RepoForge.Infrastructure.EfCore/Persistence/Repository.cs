@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using RepoForge.Domain.Interfaces;
+using RepoForge.Abstractions;
 using System.Linq.Expressions;
 
-namespace RepoForge.Infrastructure.EfCore.Persistence;
+namespace RepoForge.EntityFrameworkCore.Persistence;
 
 public class Repository<T> : IRepository<T> where T : class
 {

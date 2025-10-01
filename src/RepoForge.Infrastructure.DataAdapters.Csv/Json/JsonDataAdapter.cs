@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RepoForge.Infrastructure.DataAdapters.Json
 {
-    using RepoForge.Abstractions.Interfaces;
+    using RepoForge.Abstractions;
     using System.Text;
     using System.Text.Json;
 

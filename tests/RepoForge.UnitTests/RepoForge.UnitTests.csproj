@@ -18,9 +18,4 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\RepoForge.Domain\RepoForge.Domain.csproj" />
-    <ProjectReference Include="..\..\src\RepoForge.Infrastructure.EfCore\RepoForge.Infrastructure.EfCore.csproj" />
-  </ItemGroup>
-
 </Project>

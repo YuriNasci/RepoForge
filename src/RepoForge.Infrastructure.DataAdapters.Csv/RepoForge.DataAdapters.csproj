@@ -12,8 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RepoForge.Domain\RepoForge.Domain.csproj" />
-    <ProjectReference Include="..\RepoForge.Infrastructure.DataAdapters.Json\RepoForge.Infrastructure.DataAdapters.Json.csproj" />
+    <ProjectReference Include="..\RepoForge.Abstractions\RepoForge.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

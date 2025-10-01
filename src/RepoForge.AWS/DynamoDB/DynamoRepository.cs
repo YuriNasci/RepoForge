@@ -1,8 +1,8 @@
 using Amazon.DynamoDBv2.DataModel;
-using RepoForge.Abstractions.Interfaces;
+using RepoForge.Abstractions;
 using System.Linq.Expressions;
 
-namespace RepoForge.Infrastructure.DynamoDb.Persistence;
+namespace RepoForge.AWS.DynamoDB;
 
 public class DynamoRepository<T> : IRepository<T> where T : class
 {

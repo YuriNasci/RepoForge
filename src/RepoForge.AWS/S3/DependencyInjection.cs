@@ -1,9 +1,8 @@
 using Amazon.S3;
 using Microsoft.Extensions.DependencyInjection;
-using RepoForge.Abstractions.Interfaces;
-using RepoForge.Infrastructure.S3.Persistence;
+using RepoForge.Abstractions;
 
-namespace RepoForge.Infrastructure.S3;
+namespace RepoForge.AWS.S3;
 
 public static class DependencyInjection
 {
