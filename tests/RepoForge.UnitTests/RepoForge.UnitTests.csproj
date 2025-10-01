@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -12,10 +12,19 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageReference Include="xunit" Version="2.9.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\RepoForge.DataAdapters\RepoForge.DataAdapters.csproj" />
+    <ProjectReference Include="..\..\src\RepoForge.Abstractions\RepoForge.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\RepoForge.AWS\RepoForge.AWS.csproj" />
+    <ProjectReference Include="..\..\src\RepoForge.EntityFrameworkCore\RepoForge.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>

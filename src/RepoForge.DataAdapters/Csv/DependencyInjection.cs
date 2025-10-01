@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RepoForge.Abstractions;
-using RepoForge.Infrastructure.DataAdapters.Json;
+using RepoForge.DataAdapters.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;

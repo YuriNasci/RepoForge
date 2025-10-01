@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using RepoForge.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RepoForge.Infrastructure.DataAdapters.Json
+namespace RepoForge.DataAdapters.Json
 {
     internal static class DependencyInjection
     {
