@@ -1,13 +1,20 @@
 # RepoForge
 <p align="center">
-  <img src="docs/banner.png" alt="RepoForge Banner" width="800"/>
+  <img src="banner.png" alt="RepoForge Banner" width="800"/>
 </p>
 
 [![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
 [![License](https://img.shields.io/badge/license-MIT-blue)](#)
 [![NuGet](https://img.shields.io/badge/NuGet-internal-lightgrey)](#)
 
-**RepoForge** é uma coleção de bibliotecas para abstração de persistência em diferentes contextos. O objetivo é oferecer uma infraestrutura consistente para repositórios relacionais, NoSQL e storage de blobs, permitindo reuso em múltiplos projetos .NET.
+**RepoForge** é uma coleção de pacotes .NET voltada para abstração de persistência em diferentes contextos.
+O objetivo é fornecer uma **infraestrutura unificada e extensível** para repositórios relacionais, NoSQL e storage de blobs, permitindo **padronização, reuso e consistência** entre múltiplos projetos.
+
+Com o RepoForge, equipes podem:
+
+* Reduzir duplicação de código de acesso a dados;
+* Aplicar boas práticas de **Repository Pattern** com suporte a diferentes backends;
+* Integrar facilmente bancos relacionais (ex: PostgreSQL), bancos NoSQL (ex: DynamoDB) e serviços de armazenamento (ex: S3).
 
 ---
 ## 📑 Índice
